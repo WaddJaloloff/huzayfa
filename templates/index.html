@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huzayfa Jalolov</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/732/732190.png">
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <div class="info-boxes">
+    <div class="info-box">
+      <span>/01</span>
+      Kompaniyangizdagi sotuvni va samaradorlikni oshirishga yordam beramiz
+    </div>
+    <div class="info-box">
+      <span>/02</span>
+      Boshqalardan farqimiz aytgan ishimizni qila olmasak bergan pulingiz 100% qaytarib beriladi
+    </div>
+    <div class="info-box">
+      <span>/03</span>
+      Shu vaqtgacha 10taga yaqin yirik loyihalar bilan ishlab kelganmiz
+    </div>
+  </div>
+
+  <div class="main-content">
+    <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=500&q=80" alt="Profile Photo">
+    <h1>IT XIZMAT UCHUN <span style="color: gold;">KONSULTATSIYA BEPUL</span></h1>
+    <p>o'z mutaxassislaringizdan qildiring yoki pulingizni qaytarib oling!</p>
+    <button id="openModal" class="attention-btn">RO‘YXATDAN O‘TISH</button>
+
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">×</span>
+      <h2>IT tizim va konsultatsiya</h2>
+      <p>Ma'lumotlaringizni qoldiring, siz bilan shaxsan o'zim bog'lanaman</p>
+      <form action="/submit" method="POST">
+        <label>Ismingiz</label>
+        <input type="text" name="name" placeholder="Ismingiz" required>
+
+        <label>Telefon raqamingiz</label>
+        <input type="tel" name="phone" placeholder="+998 99-999-9999" required>
+
+        <label>Biznesingiz yo‘nalishi</label>
+        <input type="text" name="business"  required>
+
+        <label>IT dastur uchun budjetingiz</label>
+        <input type="text" name="budget" required>
+
+        <button type="submit">YUBORISH</button>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+    const modal = document.getElementById('modal');
+
+    openModal.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

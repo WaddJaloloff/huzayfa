@@ -1,0 +1,326 @@
+
+.attention-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #f5c342, #f1b100);
+  color: #000;
+  border: none;
+  padding: 16px 50px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 25px rgba(245,195,66,0.4);
+  animation: floatPulse 3s ease-in-out infinite; /* sekin tebranish */
+}
+
+/* Suv halqalari */
+.attention-btn::before,
+.attention-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  height: 220%;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.4);
+  opacity: 0;
+  animation: waveRipple 3s infinite ease-out;
+}
+
+.attention-btn::after {
+  animation-delay: 1.5s;
+}
+
+/* Yaltirab turgan ichki nur */
+.attention-btn::selection,
+.attention-btn:focus {
+  outline: none;
+}
+
+.attention-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hoverda yanada yorqinroq */
+.attention-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 50px rgba(255, 217, 94, 0.6);
+  background: linear-gradient(90deg, #ffd95e, #f5c342);
+}
+
+/* --- Animatsiyalar --- */
+
+/* To‘lqin effekti */
+@keyframes waveRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.9;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Tugmaning sekin "nafas olishi" effekti */
+@keyframes floatPulse {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 25px rgba(245,195,66,0.4);
+  }
+  50% {
+    transform: translateY(-6px);
+    box-shadow: 0 0 40px rgba(255,217,94,0.6);
+  }
+}
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://wallpapers.com/images/hd/brown-woven-aesthetic-pattern-supnq6jvvxgxrxzr.jpg');
+      background-position: center;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .info-boxes {
+      position: absolute;
+      top: 10%;
+      width: 90%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      backdrop-filter: blur(10px);
+      width: 30%;
+      min-width: 220px;
+    }
+
+    .info-box span {
+      color: #999;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .main-content img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #f5c342;
+      color: #000;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffd95e;
+      transform: scale(1.05);
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #fff;
+      color: #000;
+      padding: 40px 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 420px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      background: linear-gradient(to right, #f5c342, #f1b100);
+      border: none;
+      color: #000;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .modal-content button:hover {
+      background: linear-gradient(to right, #ffd95e, #f5c342);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 20px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .info-boxes {
+        flex-direction: column;
+        align-items: center;
+      }
+      .info-box {
+        width: 90%;
+        text-align: center;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: auto; /* sig‘mayotgan kontent uchun */
+    overflow-y: auto; /* scroll yoqiladi */
+    padding: 20px 0;
+  }
+
+  .main-content {
+    order: 1; /* avval chiqadi */
+    margin-top: 60px;
+    padding: 0 10px 50px 10px;
+  }
+
+  .main-content img {
+    width: 140px;
+    height: 140px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  p {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  button {
+    font-size: 13px;
+    padding: 12px 30px;
+  }
+
+  .info-boxes {
+    position: relative;
+    order: 2; /* endi pastda chiqadi */
+    top: auto;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-box {
+    width: 90%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
