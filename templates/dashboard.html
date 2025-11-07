@@ -208,97 +208,92 @@
   </div>
 
   <footer>© 2025 Lead Admin Panel</footer>
+<script>
+  let editing = false;
+  let allLeads = [];
 
-  <script>
-    let editing = false;
-    let allLeads = [];
+  function colorize(select, value) {
+    select.classList.remove("status-boglanmadik", "status-bekor-qilindi", "status-boglandik");
+    if (value === "bog'lanmadik") select.classList.add("status-boglanmadik");
+    if (value === "bekor qilindi") select.classList.add("status-bekor-qilindi");
+    if (value === "bog'landik") select.classList.add("status-boglandik");
+  }
 
-    function colorize(select, value) {
-      select.classList.remove("status-boglanmadik", "status-bekor-qilindi", "status-boglandik");
-      if (value === "bog'lanmadik") select.classList.add("status-boglanmadik");
-      if (value === "bekor qilindi") select.classList.add("status-bekor-qilindi");
-      if (value === "bog'landik") select.classList.add("status-boglandik");
-    }
+  async function refreshData() {
+    if (editing) return;
+    const res = await fetch("/api/leads");
+    const leads = await res.json();
+    allLeads = leads;
+    const selected = document.getElementById("filterStatus").value;
+    renderLeads(selected === "barchasi" ? leads : leads.filter(l => l.status === selected));
+  }
 
-    async function refreshData() {
-      if (editing) return;
-      const res = await fetch("/api/leads");
-      const leads = await res.json();
-      allLeads = leads;
-      const selected = document.getElementById("filterStatus").value;
-      renderLeads(selected === "barchasi" ? leads : leads.filter(l => l.status === selected));
-    }
+  function renderLeads(leads) {
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
 
-    function renderLeads(leads) {
-      const tbody = document.getElementById("tbody");
-      tbody.innerHTML = "";
-      leads.forEach((lead, i) => {
-        const date = new Date(lead.created_at);
-        const formatted = date.toLocaleString("uz-UZ", {
-          day: "numeric", month: "long", year: "numeric",
-          hour: "2-digit", minute: "2-digit"
-        });
+    leads.forEach((lead, i) => {
+      const formatted = lead.created_at_formatted; // endi 05 November 2025, 23:21 ko‘rinadi
 
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${i + 1}</td>
-          <td>${lead.name}</td>
-          <td>${lead.phone}</td>
-          <td>${lead.business}</td>
-          <td>${lead.budget}</td>
-          <td>
-            <select onchange="changeStatus(${lead.id}, this)" data-id="${lead.id}">
-              <option value="bog'lanmadik">bog'lanmadik</option>
-              <option value="bekor qilindi">bekor qilindi</option>
-              <option value="bog'landik">bog'landik</option>
-            </select>
-          </td>
-          <td>
-            <input class="comment" type="text"
-              value="${lead.comment || ""}"
-              onfocus="editing=true"
-              onblur="editing=false; saveComment(${lead.id}, this.value)">
-          </td>
-          <td>${formatted}</td>
-        `;
-        tbody.appendChild(row);
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${i + 1}</td>
+        <td>${lead.name}</td>
+        <td>${lead.phone}</td>
+        <td>${lead.business}</td>
+        <td>${lead.budget}</td>
+        <td>
+          <select onchange="changeStatus(${lead.id}, this)" data-id="${lead.id}">
+            <option value="bog'lanmadik">bog'lanmadik</option>
+            <option value="bekor qilindi">bekor qilindi</option>
+            <option value="bog'landik">bog'landik</option>
+          </select>
+        </td>
+        <td>
+          <input class="comment" type="text"
+            value="${lead.comment || ""}"
+            onfocus="editing=true"
+            onblur="editing=false; saveComment(${lead.id}, this.value)">
+        </td>
+        <td>${formatted}</td>
+      `;
+      tbody.appendChild(row);
 
-        const select = row.querySelector("select");
-        select.value = lead.status;
-        colorize(select, lead.status);
-      });
-    }
+      const select = row.querySelector("select");
+      select.value = lead.status;
+      colorize(select, lead.status);
+    });
+  }
 
-    function filterLeads() {
-      const selected = document.getElementById("filterStatus").value;
-      if (selected === "barchasi") renderLeads(allLeads);
-      else {
-        const filtered = allLeads.filter(l => l.status === selected);
-        renderLeads(filtered);
-      }
-    }
+  function filterLeads() {
+    const selected = document.getElementById("filterStatus").value;
+    if (selected === "barchasi") renderLeads(allLeads);
+    else renderLeads(allLeads.filter(l => l.status === selected));
+  }
 
-    async function changeStatus(id, select) {
-      const status = select.value;
-      colorize(select, status);
-      await fetch(`/update/${id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status })
-      });
-      refreshData();
-    }
+  async function changeStatus(id, select) {
+    const status = select.value;
+    colorize(select, status);
+    await fetch(`/update/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status })
+    });
+    refreshData();
+  }
 
-    async function saveComment(id, comment) {
-      await fetch(`/update/${id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ comment })
-      });
-    }
+  async function saveComment(id, comment) {
+    await fetch(`/update/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ comment })
+    });
+  }
 
-    window.onload = refreshData;
-    setInterval(refreshData, 10000);
-  </script>
+  window.onload = refreshData;
+  setInterval(refreshData, 10000);
+</script>
+
 </body>
 </html>
+
