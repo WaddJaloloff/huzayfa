@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/732/732190.png">
   <link rel="stylesheet" href="static/style.css">
 </head>
+
 <body>
   <div class="info-boxes">
     <div class="info-box">
@@ -24,7 +26,8 @@
   </div>
 
   <div class="main-content">
-    <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=500&q=80" alt="Profile Photo">
+    <img src="static/IMG_20251107_192516_903.JPG"
+      alt="Profile Photo">
     <h1>IT XIZMAT UCHUN <span style="color: gold;">KONSULTATSIYA BEPUL</span></h1>
     <p>o'z mutaxassislaringizdan qildiring yoki pulingizni qaytarib oling!</p>
     <button id="openModal" class="attention-btn">RO‘YXATDAN O‘TISH</button>
@@ -43,38 +46,61 @@
         <input type="text" name="name" placeholder="Ismingiz" required>
 
         <label>Telefon raqamingiz</label>
-        <input type="tel" name="phone" placeholder="+998 99-999-9999" required>
+        <input type="tel" name="phone" placeholder="99-999-9999" required>
 
         <label>Biznesingiz yo‘nalishi</label>
-        <input type="text" name="business"  required>
+        <input type="text" name="business" placeholder="Sohangiz" required>
 
         <label>IT dastur uchun budjetingiz</label>
-        <input type="text" name="budget" required>
+        <input type="text" name="budget" placeholder="$15.000" required>
 
         <button type="submit">YUBORISH</button>
       </form>
 
     </div>
   </div>
-
   <script>
     const openModal = document.getElementById('openModal');
     const closeModal = document.getElementById('closeModal');
     const modal = document.getElementById('modal');
 
+    // Modal ochilganda
     openModal.addEventListener('click', () => {
+      modal.classList.add('show');
       modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     });
 
-    closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
+    // Modal yopilganda
+    const closeModalFunc = () => {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 400); // CSS transition bilan mos
+    };
 
+    closeModal.addEventListener('click', closeModalFunc);
+
+    // Modal tashqarisiga bosilganda yopish
     window.addEventListener('click', (e) => {
       if (e.target === modal) {
-        modal.style.display = 'none';
+        closeModalFunc();
       }
     });
+
+    // Mobil klaviatura chiqganda modal content scroll qilish uchun
+    modal.addEventListener('touchmove', (e) => {
+      e.stopPropagation();
+    }, { passive: true });
+    // Misol: modal ichidagi formani pastga scroll qilish
+    modal.scrollTo({
+      top: 200,    // kerakli pozitsiya
+      behavior: 'smooth'
+    });
+
   </script>
+
 </body>
+
 </html>

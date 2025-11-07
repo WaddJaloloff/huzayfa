@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+
+body, .modal {
+  scroll-behavior: smooth;
+}
+
 
 .attention-btn {
   position: relative;
@@ -12,10 +19,10 @@
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 25px rgba(245,195,66,0.4);
-  animation: floatPulse 3s ease-in-out infinite; /* sekin tebranish */
+  animation: floatPulse 3s ease-in-out infinite; 
 }
 
-/* Suv halqalari */
+
 .attention-btn::before,
 .attention-btn::after {
   content: "";
@@ -82,196 +89,207 @@
   }
 }
 
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
 
-    body {
-      height: 100vh;
-      width: 100vw;
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://wallpapers.com/images/hd/brown-woven-aesthetic-pattern-supnq6jvvxgxrxzr.jpg');
-      background-position: center;
-      background-size: cover;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
+body {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('wallpaper.webp');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
 
-    .info-boxes {
-      position: absolute;
-      top: 10%;
-      width: 90%;
-      max-width: 1100px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+.info-boxes {
+  position: absolute;
+  top: 10%;
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
-    .info-box {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 14px;
-      backdrop-filter: blur(10px);
-      width: 30%;
-      min-width: 220px;
-    }
+.info-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  width: 30%;
+  min-width: 220px;
+}
 
-    .info-box span {
-      color: #999;
-      display: block;
-      margin-bottom: 5px;
-    }
+.info-box span {
+  color: #999;
+  display: block;
+  margin-bottom: 5px;
+}
 
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
-    .main-content img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
+.main-content img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
 
-    h1 {
-      font-size: 38px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
+h1 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
 
-    h1 span {
-      display: block;
-    }
+h1 span {
+  display: block;
+}
 
-    p {
-      margin-top: 10px;
-      font-size: 16px;
-      color: #ccc;
-    }
+p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ccc;
+}
 
-    button {
-      margin-top: 30px;
-      background-color: #f5c342;
-      color: #000;
-      border: none;
-      padding: 15px 40px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
+button {
+  margin-top: 30px;
+  background-color: #f5c342;
+  color: #000;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
 
-    button:hover {
-      background-color: #ffd95e;
-      transform: scale(1.05);
-    }
+button:hover {
+  background-color: #ffd95e;
+  transform: scale(1.05);
+}
 
-    /* Modal Styles */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.4s ease; /* yumshoq fade effekti */
+  overflow-y: auto; /* Modal ichidagi scroll */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling mobil uchun */
+}
 
-    .modal-content {
-      background: #fff;
-      color: #000;
-      padding: 40px 30px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 420px;
-      text-align: left;
-      position: relative;
-      box-shadow: 0 0 30px rgba(0,0,0,0.4);
-    }
+.modal.show {
+  opacity: 1;
+}
 
-    .modal-content h2 {
-      text-align: center;
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
+.modal-content {
+  background: #fff;
+  color: #000;
+  padding: 40px 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 420px;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  max-height: 90vh; /* mobil klaviatura uchun */
+  overflow-y: auto;
+}
 
-    .modal-content p {
-      text-align: center;
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 20px;
-    }
+.modal-content h2 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
 
-    .modal-content input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
+.modal-content p {
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 20px;
+}
 
-    .modal-content button {
-      width: 100%;
-      background: linear-gradient(to right, #f5c342, #f1b100);
-      border: none;
-      color: #000;
-      padding: 12px;
-      border-radius: 6px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
 
-    .modal-content button:hover {
-      background: linear-gradient(to right, #ffd95e, #f5c342);
-    }
+.modal-content button {
+  width: 100%;
+  background: linear-gradient(to right, #f5c342, #f1b100);
+  border: none;
+  color: #000;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 20px;
-      color: #000;
-      cursor: pointer;
-    }
+.modal-content button:hover {
+  background: linear-gradient(to right, #ffd95e, #f5c342);
+}
 
-    @media (max-width: 768px) {
-      .info-boxes {
-        flex-direction: column;
-        align-items: center;
-      }
-      .info-box {
-        width: 90%;
-        text-align: center;
-      }
-      h1 {
-        font-size: 28px;
-      }
-      p {
-        font-size: 14px;
-      }
-    }
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  color: #000;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .info-boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+  .info-box {
+    width: 90%;
+    text-align: center;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+
+
 @media (max-width: 768px) {
   body {
     flex-direction: column;
