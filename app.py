@@ -2,7 +2,6 @@ from flask import Flask, jsonify, render_template, request, redirect, url_for, s
 import json, os, pytz, requests
 from datetime import datetime, timezone, timedelta
 
-
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 
@@ -11,28 +10,52 @@ ADMIN_PASSWORD = "HUZayfa_?771"
 TELEGRAM_TOKEN = "8597695048:AAH2jdv4R49BVmXd1hqHowqZyB8qiVF8A6Q"
 CHAT_ID = "6565325969"
 
+TASHKENT_TZ = timezone(timedelta(hours=5))
+MONTHS = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+]
 
-# === Fayl funksiyalari ===
+# === JSON faylni yuklash ===
 def load_data():
     if not os.path.exists(DATA_FILE):
         with open(DATA_FILE, "w", encoding="utf-8") as f:
-            json.dump([], f)
-    if os.path.getsize(DATA_FILE) == 0:
-        return []
+            json.dump({"visits": 0, "leads": []}, f, ensure_ascii=False, indent=2)
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         try:
             return json.load(f)
         except json.JSONDecodeError:
-            return []
+            return {"visits": 0, "leads": []}
+
 
 def save_data(data):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+# === Vaqt formatlash ===
+def format_datetime_manual(iso_str):
+    dt = datetime.fromisoformat(iso_str)
+    dt = dt.astimezone(TASHKENT_TZ)
+    day = dt.day
+    month = MONTHS[dt.month - 1]
+    year = dt.year
+    hour = dt.hour
+    minute = dt.minute
+    return f"{day:02d} {month} {year}, {hour:02d}:{minute:02d}"
+
 # === Bosh sahifa ===
 @app.route("/")
 def index():
-    return render_template("index.html")
+    data = load_data()
+
+    # Sessiya tekshirish
+    if not session.get("visited"):
+        data["visits"] += 1
+        save_data(data)
+        session["visited"] = True
+
+    return render_template("index.html", visits=data["visits"])
+
 
 # === Forma submit ===
 @app.route("/submit", methods=["POST"])
@@ -46,12 +69,10 @@ def submit():
         return "Barcha maydonlarni to‘ldiring!", 400
 
     data = load_data()
-    new_id = len(data) + 1
+    new_id = len(data["leads"]) + 1
 
     tz = pytz.timezone("Asia/Tashkent")
     now = datetime.now(tz)
-
-    # JSON ga ISO formatda saqlaymiz
     iso_time = now.isoformat()
 
     new_entry = {
@@ -65,7 +86,7 @@ def submit():
         "created_at": iso_time
     }
 
-    data.append(new_entry)
+    data["leads"].append(new_entry)
     save_data(data)
 
     # Telegramga yuborish
@@ -108,59 +129,31 @@ def admin():
             return render_template("admin.html", error="Noto‘g‘ri parol")
     return render_template("admin.html")
 
-
-
-TASHKENT_TZ = timezone(timedelta(hours=5))
-
-# Oyni inglizcha nomlar bilan list
-MONTHS = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-]
-
-def format_datetime_manual(iso_str):
-    # ISO stringni datetime ga aylantiramiz
-    dt = datetime.fromisoformat(iso_str)
-    # Tashkent timezone qo‘shish
-    dt = dt.astimezone(TASHKENT_TZ)
-    day = dt.day
-    month = MONTHS[dt.month - 1]
-    year = dt.year
-    hour = dt.hour
-    minute = dt.minute
-    # 2 xonali formatlash
-    return f"{day:02d} {month} {year}, {hour:02d}:{minute:02d}"
-
-
-
-
+# === Dashboard ===
 @app.route("/dashboard")
 def dashboard():
     if not session.get("admin"):
         return redirect(url_for("admin"))
-    
+
     data = load_data()
-    # Eng so‘nggi lead yuqorida (ISO datetime bo‘yicha)
-    data.sort(key=lambda x: x["created_at"], reverse=True)
-    
-    # Admin panelda vaqtni formatlash
-    for lead in data:
+    leads = data.get("leads", [])
+    leads.sort(key=lambda x: x["created_at"], reverse=True)
+    for lead in leads:
         lead["created_at_formatted"] = format_datetime_manual(lead["created_at"])
 
-    
-    return render_template("dashboard.html", leads=data)
+    visits = data.get("visits", 0)  # umumiy tashriflar
+    leads_count = len(leads)        # leadlar soni
+    return render_template("dashboard.html", leads=leads, visits=visits, leads_count=leads_count)
 
+# === API ===
 @app.route("/api/leads")
 def api_leads():
     data = load_data()
-    data.sort(key=lambda x: x["created_at"], reverse=True)
-    
-    # Har bir lead uchun formatlangan vaqt qo‘shish
-    for lead in data:
+    leads = data.get("leads", [])
+    leads.sort(key=lambda x: x["created_at"], reverse=True)
+    for lead in leads:
         lead["created_at_formatted"] = format_datetime_manual(lead["created_at"])
-
-    
-    return jsonify(data)
+    return jsonify(leads)
 
 # === Lead update ===
 @app.route("/update/<int:lead_id>", methods=["POST"])
@@ -172,7 +165,7 @@ def update(lead_id):
     data = load_data()
     updated = False
 
-    for lead in data:
+    for lead in data.get("leads", []):
         if lead["id"] == lead_id:
             if "status" in payload:
                 lead["status"] = payload["status"]

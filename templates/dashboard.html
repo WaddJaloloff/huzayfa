@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
   <meta charset="UTF-8">
   <title>Lead Dashboard</title>
@@ -94,7 +95,8 @@
       box-shadow: var(--shadow);
     }
 
-    th, td {
+    th,
+    td {
       padding: 16px 20px;
       text-align: left;
       border-bottom: 1px solid #eee;
@@ -166,77 +168,108 @@
       .container {
         padding: 20px;
       }
-      th, td {
+
+      th,
+      td {
         padding: 12px;
         font-size: 14px;
       }
     }
+
+    .stats-box {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .stat-1 {
+      color: green;
+    }
+    .stat-2 {
+      color: orange;
+    }
   </style>
 </head>
+
 <body>
   <header>
     <h2>📊 Leadlar paneli</h2>
     <a href="{{ url_for('logout') }}">Chiqish</a>
   </header>
 
+
   <div class="container">
-    <div class="top-bar">
-      <h3>Leadlar ro‘yxati</h3>
-      <select id="filterStatus" onchange="filterLeads()">
-        <option value="barchasi">Barchasi</option>
-        <option value="bog'lanmadik">Bog‘lanmadik</option>
-        <option value="bekor qilindi">Bekor qilindi</option>
-        <option value="bog'landik">Bog‘landik</option>
-      </select>
+    <div class="stats-box">
+      <div class="stat-1">
+        <strong>Umumiy tashriflar:</strong> {{ visits }}
+      </div>
+      <hr>
+      <div class="stat-2">
+        <strong>Leadlar soni:</strong> {{ leads_count }}
+      </div>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Ism</th>
-          <th>Telefon</th>
-          <th>Biznes</th>
-          <th>Budjet</th>
-          <th>Status</th>
-          <th>Izoh</th>
-          <th>Vaqt</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
+
+  <div class="top-bar">
+    <h3>Leadlar ro‘yxati</h3>
+    <select id="filterStatus" onchange="filterLeads()">
+      <option value="barchasi">Barchasi</option>
+      <option value="bog'lanmadik">Bog‘lanmadik</option>
+      <option value="bekor qilindi">Bekor qilindi</option>
+      <option value="bog'landik">Bog‘landik</option>
+    </select>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Ism</th>
+        <th>Telefon</th>
+        <th>Biznes</th>
+        <th>Budjet</th>
+        <th>Status</th>
+        <th>Izoh</th>
+        <th>Vaqt</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
   </div>
 
   <footer>© 2025 Lead Admin Panel</footer>
-<script>
-  let editing = false;
-  let allLeads = [];
+  <script>
+    let editing = false;
+    let allLeads = [];
 
-  function colorize(select, value) {
-    select.classList.remove("status-boglanmadik", "status-bekor-qilindi", "status-boglandik");
-    if (value === "bog'lanmadik") select.classList.add("status-boglanmadik");
-    if (value === "bekor qilindi") select.classList.add("status-bekor-qilindi");
-    if (value === "bog'landik") select.classList.add("status-boglandik");
-  }
+    function colorize(select, value) {
+      select.classList.remove("status-boglanmadik", "status-bekor-qilindi", "status-boglandik");
+      if (value === "bog'lanmadik") select.classList.add("status-boglanmadik");
+      if (value === "bekor qilindi") select.classList.add("status-bekor-qilindi");
+      if (value === "bog'landik") select.classList.add("status-boglandik");
+    }
 
-  async function refreshData() {
-    if (editing) return;
-    const res = await fetch("/api/leads");
-    const leads = await res.json();
-    allLeads = leads;
-    const selected = document.getElementById("filterStatus").value;
-    renderLeads(selected === "barchasi" ? leads : leads.filter(l => l.status === selected));
-  }
+    async function refreshData() {
+      if (editing) return;
+      const res = await fetch("/api/leads");
+      const leads = await res.json();
+      allLeads = leads;
+      const selected = document.getElementById("filterStatus").value;
+      renderLeads(selected === "barchasi" ? leads : leads.filter(l => l.status === selected));
+    }
 
-  function renderLeads(leads) {
-    const tbody = document.getElementById("tbody");
-    tbody.innerHTML = "";
+    function renderLeads(leads) {
+      const tbody = document.getElementById("tbody");
+      tbody.innerHTML = "";
 
-    leads.forEach((lead, i) => {
-      const formatted = lead.created_at_formatted; // endi 05 November 2025, 23:21 ko‘rinadi
+      leads.forEach((lead, i) => {
+        const formatted = lead.created_at_formatted; // endi 05 November 2025, 23:21 ko‘rinadi
 
-      const row = document.createElement("tr");
-      row.innerHTML = `
+        const row = document.createElement("tr");
+        row.innerHTML = `
         <td>${i + 1}</td>
         <td>${lead.name}</td>
         <td>${lead.phone}</td>
@@ -257,43 +290,43 @@
         </td>
         <td>${formatted}</td>
       `;
-      tbody.appendChild(row);
+        tbody.appendChild(row);
 
-      const select = row.querySelector("select");
-      select.value = lead.status;
-      colorize(select, lead.status);
-    });
-  }
+        const select = row.querySelector("select");
+        select.value = lead.status;
+        colorize(select, lead.status);
+      });
+    }
 
-  function filterLeads() {
-    const selected = document.getElementById("filterStatus").value;
-    if (selected === "barchasi") renderLeads(allLeads);
-    else renderLeads(allLeads.filter(l => l.status === selected));
-  }
+    function filterLeads() {
+      const selected = document.getElementById("filterStatus").value;
+      if (selected === "barchasi") renderLeads(allLeads);
+      else renderLeads(allLeads.filter(l => l.status === selected));
+    }
 
-  async function changeStatus(id, select) {
-    const status = select.value;
-    colorize(select, status);
-    await fetch(`/update/${id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status })
-    });
-    refreshData();
-  }
+    async function changeStatus(id, select) {
+      const status = select.value;
+      colorize(select, status);
+      await fetch(`/update/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status })
+      });
+      refreshData();
+    }
 
-  async function saveComment(id, comment) {
-    await fetch(`/update/${id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ comment })
-    });
-  }
+    async function saveComment(id, comment) {
+      await fetch(`/update/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ comment })
+      });
+    }
 
-  window.onload = refreshData;
-  setInterval(refreshData, 10000);
-</script>
+    window.onload = refreshData;
+    setInterval(refreshData, 10000);
+  </script>
 
 </body>
-</html>
 
+</html>

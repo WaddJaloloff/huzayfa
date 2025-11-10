@@ -26,8 +26,7 @@
   </div>
 
   <div class="main-content">
-    <img src="static/IMG_20251107_192516_903.JPG"
-      alt="Profile Photo">
+    <img src="static/IMG_20251107_192516_903.JPG" alt="Profile Photo">
     <h1>IT XIZMAT UCHUN <span style="color: gold;">KONSULTATSIYA BEPUL</span></h1>
     <p>o'z mutaxassislaringizdan qildiring yoki pulingizni qaytarib oling!</p>
     <button id="openModal" class="attention-btn">RO‘YXATDAN O‘TISH</button>
@@ -46,7 +45,20 @@
         <input type="text" name="name" placeholder="Ismingiz" required>
 
         <label>Telefon raqamingiz</label>
-        <input type="tel" name="phone" placeholder="99-999-9999" required>
+        <div class="phone-wrapper">
+          <span class="phone-prefix">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/flags/4x3/uz.svg" alt="UZ"
+              class="flag-icon">
+            <span class="dial">+998</span>
+          </span>
+
+          <input type="text" id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="901234567"
+            maxlength="9" pattern="^\d{9}$" required aria-describedby="phoneError">
+        </div>
+
+        <small id="phoneError" class="error-text">
+          Telefon raqam faqat raqamlardan iborat bo‘lsin va aniq 9 ta raqam kiriting.
+        </small>
 
         <label>Biznesingiz yo‘nalishi</label>
         <input type="text" name="business" placeholder="Sohangiz" required>
@@ -56,6 +68,7 @@
 
         <button type="submit">YUBORISH</button>
       </form>
+
 
     </div>
   </div>
@@ -100,7 +113,25 @@
     });
 
   </script>
+  <script>
+    const phoneInput = document.getElementById("phone");
+    const phoneError = document.getElementById("phoneError");
 
+    // Faqat raqam kiritish
+    phoneInput.addEventListener("input", () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, "");
+    });
+
+    // Form yuborishda tekshirish
+    document.querySelector("form").addEventListener("submit", function (e) {
+      if (phoneInput.value.length !== 9) {
+        e.preventDefault();
+        phoneError.style.display = "block";
+      } else {
+        phoneError.style.display = "none";
+      }
+    });
+  </script>
 </body>
 
 </html>
