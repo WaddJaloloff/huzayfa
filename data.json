@@ -1,0 +1,15 @@
+{
+  "visits": 32,
+  "leads": [
+    {
+      "id": 1,
+      "name": "Bjdjd",
+      "phone": "909447250",
+      "business": "It",
+      "budget": "5000",
+      "status": "bog'lanmadik",
+      "comment": "",
+      "created_at": "2025-11-11T16:46:29.932555+05:00"
+    }
+  ]
+}
