@@ -500,3 +500,70 @@ button:hover {
   margin-top: 6px;
   display: none; /* har doim berilgan bo‘lsin */
 }
+.toast {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  padding: 14px 22px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: all 0.4s ease;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+}
+
+/* Ko‘rinadigan holat */
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Chat-style pufakcha */
+.toast:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid rgba(0,0,0,0.85);
+}
+
+/* Turlari */
+.toast.success {
+  background: #2ecc71;
+}
+.toast.success:after {
+  border-top-color: #2ecc71;
+}
+
+.toast.warning {
+  background: #f1c40f;
+}
+.toast.warning:after {
+  border-top-color: #f1c40f;
+}
+
+/* Ikonkalar */
+.toast i {
+  font-size: 20px;
+}
+
+
+/* SVG ikonkalar o‘lchami */
+.toast svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: #fff;
+}

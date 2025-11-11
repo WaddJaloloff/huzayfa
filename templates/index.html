@@ -72,66 +72,107 @@
 
     </div>
   </div>
+  <div id="toast" class="toast"></div>
+
   <script>
-    const openModal = document.getElementById('openModal');
-    const closeModal = document.getElementById('closeModal');
-    const modal = document.getElementById('modal');
+  // === Modal funksiyalari ===
+  const openModal = document.getElementById('openModal');
+  const closeModal = document.getElementById('closeModal');
+  const modal = document.getElementById('modal');
 
-    // Modal ochilganda
-    openModal.addEventListener('click', () => {
-      modal.classList.add('show');
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
+  openModal.addEventListener('click', () => {
+    modal.classList.add('show');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
 
-    // Modal yopilganda
-    const closeModalFunc = () => {
-      modal.classList.remove('show');
-      setTimeout(() => {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }, 400); // CSS transition bilan mos
+  const closeModalFunc = () => {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 400);
+  };
+
+  closeModal.addEventListener('click', closeModalFunc);
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModalFunc();
+  });
+
+  modal.addEventListener('touchmove', (e) => {
+    e.stopPropagation();
+  }, { passive: true });
+
+  // === Telefon faqat raqam bo‘lsin ===
+  const phoneInput = document.getElementById("phone");
+  const phoneError = document.getElementById("phoneError");
+
+  phoneInput.addEventListener("input", () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, "");
+  });
+
+  // === SVG ikonka bilan toast ===
+  function showToast(message, type = "success") {
+    const toast = document.getElementById("toast");
+
+    const icons = {
+      success: `
+        <svg viewBox="0 0 24 24">
+          <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"></path>
+        </svg>
+      `,
+      warning: `
+        <svg viewBox="0 0 24 24">
+          <path d="M1 21h22L12 2 1 21z"></path>
+        </svg>
+      `
     };
 
-    closeModal.addEventListener('click', closeModalFunc);
+    toast.innerHTML = icons[type] + message;
 
-    // Modal tashqarisiga bosilganda yopish
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModalFunc();
-      }
-    });
+    toast.className = "toast show " + type;
 
-    // Mobil klaviatura chiqganda modal content scroll qilish uchun
-    modal.addEventListener('touchmove', (e) => {
-      e.stopPropagation();
-    }, { passive: true });
-    // Misol: modal ichidagi formani pastga scroll qilish
-    modal.scrollTo({
-      top: 200,    // kerakli pozitsiya
-      behavior: 'smooth'
-    });
+    setTimeout(() => {
+      toast.className = "toast " + type;
+    }, 3200);
+  }
 
-  </script>
-  <script>
-    const phoneInput = document.getElementById("phone");
-    const phoneError = document.getElementById("phoneError");
+  // === Formni AJAX orqali yuborish ===
+  document.querySelector("form").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-    // Faqat raqam kiritish
-    phoneInput.addEventListener("input", () => {
-      phoneInput.value = phoneInput.value.replace(/\D/g, "");
-    });
+    if (phoneInput.value.length !== 9) {
+      phoneError.style.display = "block";
+      return;
+    }
 
-    // Form yuborishda tekshirish
-    document.querySelector("form").addEventListener("submit", function (e) {
-      if (phoneInput.value.length !== 9) {
-        e.preventDefault();
-        phoneError.style.display = "block";
+    phoneError.style.display = "none";
+
+    const formData = new FormData(this);
+
+    try {
+      const response = await fetch("/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        showToast("Ma'lumotlar muvaffaqiyatli yuborildi.", "success");
       } else {
-        phoneError.style.display = "none";
+        showToast("Xatolik bo‘ldi, ammo ma'lumotlar qabul qilindi.", "warning");
       }
-    });
-  </script>
+
+    } catch (error) {
+      showToast("Serverga ulanib bo‘lmadi, ammo ma'lumotlar qabul qilindi.", "warning");
+    }
+
+    this.reset();
+    closeModalFunc();
+  });
+</script>
+
+
 </body>
 
 </html>
