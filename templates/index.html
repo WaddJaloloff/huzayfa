@@ -59,12 +59,12 @@
         <small id="phoneError" class="error-text">
           Telefon raqam faqat raqamlardan iborat bo‘lsin va aniq 9 ta raqam kiriting.
         </small>
-
+<!-- 
         <label>Biznesingiz yo‘nalishi</label>
         <input type="text" name="business" placeholder="Sohangiz" required>
 
         <label>IT dastur uchun budjetingiz</label>
-        <input type="text" name="budget" placeholder="$15.000" required>
+        <input type="text" name="budget" placeholder="$15.000" required> -->
 
         <button type="submit">YUBORISH</button>
       </form>
@@ -75,102 +75,102 @@
   <div id="toast" class="toast"></div>
 
   <script>
-  // === Modal funksiyalari ===
-  const openModal = document.getElementById('openModal');
-  const closeModal = document.getElementById('closeModal');
-  const modal = document.getElementById('modal');
+    // === Modal funksiyalari ===
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+    const modal = document.getElementById('modal');
 
-  openModal.addEventListener('click', () => {
-    modal.classList.add('show');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  });
+    openModal.addEventListener('click', () => {
+      modal.classList.add('show');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
 
-  const closeModalFunc = () => {
-    modal.classList.remove('show');
-    setTimeout(() => {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    }, 400);
-  };
+    const closeModalFunc = () => {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 400);
+    };
 
-  closeModal.addEventListener('click', closeModalFunc);
+    closeModal.addEventListener('click', closeModalFunc);
 
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) closeModalFunc();
-  });
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeModalFunc();
+    });
 
-  modal.addEventListener('touchmove', (e) => {
-    e.stopPropagation();
-  }, { passive: true });
+    modal.addEventListener('touchmove', (e) => {
+      e.stopPropagation();
+    }, { passive: true });
 
-  // === Telefon faqat raqam bo‘lsin ===
-  const phoneInput = document.getElementById("phone");
-  const phoneError = document.getElementById("phoneError");
+    // === Telefon faqat raqam bo‘lsin ===
+    const phoneInput = document.getElementById("phone");
+    const phoneError = document.getElementById("phoneError");
 
-  phoneInput.addEventListener("input", () => {
-    phoneInput.value = phoneInput.value.replace(/\D/g, "");
-  });
+    phoneInput.addEventListener("input", () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, "");
+    });
 
-  // === SVG ikonka bilan toast ===
-  function showToast(message, type = "success") {
-    const toast = document.getElementById("toast");
+    // === SVG ikonka bilan toast ===
+    function showToast(message, type = "success") {
+      const toast = document.getElementById("toast");
 
-    const icons = {
-      success: `
+      const icons = {
+        success: `
         <svg viewBox="0 0 24 24">
           <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"></path>
         </svg>
       `,
-      warning: `
+        warning: `
         <svg viewBox="0 0 24 24">
           <path d="M1 21h22L12 2 1 21z"></path>
         </svg>
       `
-    };
+      };
 
-    toast.innerHTML = icons[type] + message;
+      toast.innerHTML = icons[type] + message;
 
-    toast.className = "toast show " + type;
+      toast.className = "toast show " + type;
 
-    setTimeout(() => {
-      toast.className = "toast " + type;
-    }, 3200);
-  }
-
-  // === Formni AJAX orqali yuborish ===
-  document.querySelector("form").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    if (phoneInput.value.length !== 9) {
-      phoneError.style.display = "block";
-      return;
+      setTimeout(() => {
+        toast.className = "toast " + type;
+      }, 3200);
     }
 
-    phoneError.style.display = "none";
+    // === Formni AJAX orqali yuborish ===
+    document.querySelector("form").addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    const formData = new FormData(this);
-
-    try {
-      const response = await fetch("/submit", {
-        method: "POST",
-        body: formData
-      });
-
-      if (response.ok) {
-        showToast("Ma'lumotlar muvaffaqiyatli yuborildi.", "success");
-      } else {
-        showToast("Xatolik bo‘ldi, ammo ma'lumotlar qabul qilindi.", "warning");
+      if (phoneInput.value.length !== 9) {
+        phoneError.style.display = "block";
+        return;
       }
 
-    } catch (error) {
-      showToast("Serverga ulanib bo‘lmadi, ammo ma'lumotlar qabul qilindi.", "warning");
-    }
+      phoneError.style.display = "none";
 
-    this.reset();
-    closeModalFunc();
-  });
-</script>
+      const formData = new FormData(this);
+
+      try {
+        const response = await fetch("/submit", {
+          method: "POST",
+          body: formData
+        });
+
+        if (response.ok) {
+          showToast("Ma'lumotlar muvaffaqiyatli yuborildi.", "success");
+        } else {
+          showToast("Xatolik bo‘ldi, ammo ma'lumotlar qabul qilindi.", "warning");
+        }
+
+      } catch (error) {
+        showToast("Serverga ulanib bo‘lmadi, ammo ma'lumotlar qabul qilindi.", "warning");
+      }
+
+      this.reset();
+      closeModalFunc();
+    });
+  </script>
 
 
 </body>

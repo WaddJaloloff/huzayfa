@@ -65,7 +65,7 @@ def submit():
     business = request.form.get("business")
     budget = request.form.get("budget")
 
-    if not all([name, phone, business, budget]):
+    if not all([name, phone]):
         return "Barcha maydonlarni to‘ldiring!", 400
 
     data = load_data()
