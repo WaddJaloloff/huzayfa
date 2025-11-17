@@ -1,101 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
-
-body,
-.modal {
-  scroll-behavior: smooth;
-}
-
-
-.attention-btn {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(90deg, #f5c342, #f1b100);
-  color: #000;
-  border: none;
-  padding: 16px 50px;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 15px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 25px rgba(245, 195, 66, 0.4);
-  animation: floatPulse 3s ease-in-out infinite;
-}
-
-
-.attention-btn::before,
-.attention-btn::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 220%;
-  height: 220%;
-  border: 2px solid rgba(255, 255, 255, 0.75);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0.4);
-  opacity: 0;
-  animation: waveRipple 3s infinite ease-out;
-}
-
-.attention-btn::after {
-  animation-delay: 1.5s;
-}
-
-/* Yaltirab turgan ichki nur */
-.attention-btn::selection,
-.attention-btn:focus {
-  outline: none;
-}
-
-.attention-btn span {
-  position: relative;
-  z-index: 1;
-}
-
-/* Hoverda yanada yorqinroq */
-.attention-btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 50px rgba(255, 217, 94, 0.6);
-  background: linear-gradient(90deg, #ffd95e, #f5c342);
-}
-
-/* --- Animatsiyalar --- */
-
-/* To‘lqin effekti */
-@keyframes waveRipple {
-  0% {
-    transform: translate(-50%, -50%) scale(0.3);
-    opacity: 0.9;
-  }
-
-  40% {
-    opacity: 0.6;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(1.8);
-    opacity: 0;
-  }
-}
-
-/* Tugmaning sekin "nafas olishi" effekti */
-@keyframes floatPulse {
-
-  0%,
-  100% {
-    transform: translateY(0);
-    box-shadow: 0 0 25px rgba(245, 195, 66, 0.4);
-  }
-
-  50% {
-    transform: translateY(-6px);
-    box-shadow: 0 0 40px rgba(255, 217, 94, 0.6);
-  }
-}
-
-
 * {
   margin: 0;
   padding: 0;
@@ -106,18 +10,19 @@ body,
 body {
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('wallpaper.webp');
-  background-position: center;
-  background-size: cover;
-  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/wallpaper.webp') center/cover no-repeat;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
+/* Info Boxes */
 .info-boxes {
   position: absolute;
   top: 10%;
@@ -130,21 +35,22 @@ body {
 }
 
 .info-box {
+  width: 30%;
+  min-width: 220px;
   background: rgba(255, 255, 255, 0.1);
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 14px;
   backdrop-filter: blur(10px);
-  width: 30%;
-  min-width: 220px;
 }
 
 .info-box span {
-  color: #999;
   display: block;
   margin-bottom: 5px;
+  color: #999;
 }
 
+/* Main Content */
 .main-content {
   display: flex;
   flex-direction: column;
@@ -167,8 +73,9 @@ h1 {
   letter-spacing: 1px;
 }
 
-h1 span {
+.highlight {
   display: block;
+  color: gold;
 }
 
 p {
@@ -177,25 +84,85 @@ p {
   color: #ccc;
 }
 
-button {
+/* Button */
+.attention-btn {
   margin-top: 30px;
-  background-color: #f5c342;
-  color: #000;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #f5c342, #f1b100);
+  color: #fff;
   border: none;
-  padding: 15px 40px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 14px;
+  padding: 16px 50px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 15px;
   cursor: pointer;
-  transition: 0.3s ease;
+  box-shadow: 0 0 25px rgba(245, 195, 66, 0.4);
+  animation: floatPulse 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-button:hover {
-  background-color: #ffd95e;
-  transform: scale(1.05);
+.attention-btn::before,
+.attention-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  height: 220%;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.4);
+  opacity: 0;
+  animation: waveRipple 3s infinite ease-out;
 }
 
-/* Modal Styles */
+.attention-btn::after {
+  animation-delay: 1.5s;
+}
+
+.attention-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 50px rgba(255, 217, 94, 0.6);
+  background: linear-gradient(90deg, #ffd95e, #f5c342);
+}
+
+
+.info-boxes h2{
+  display: none;
+}
+/* Animations */
+@keyframes waveRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.9;
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes floatPulse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 25px rgba(245, 195, 66, 0.4);
+  }
+
+  50% {
+    transform: translateY(-6px);
+    box-shadow: 0 0 40px rgba(255, 217, 94, 0.6);
+  }
+}
+
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -206,18 +173,16 @@ button:hover {
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
   opacity: 0;
   transition: opacity 0.4s ease;
-  /* yumshoq fade effekti */
+  z-index: 1000;
   overflow-y: auto;
-  /* Modal ichidagi scroll */
   -webkit-overflow-scrolling: touch;
-  /* Smooth scrolling mobil uchun */
 }
 
 .modal.show {
   opacity: 1;
+  display: flex;
 }
 
 .modal-content {
@@ -231,7 +196,6 @@ button:hover {
   position: relative;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
   max-height: 90vh;
-  /* mobil klaviatura uchun */
   overflow-y: auto;
 }
 
@@ -251,7 +215,6 @@ button:hover {
 .modal-content input {
   width: 100%;
   padding: 12px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
@@ -282,99 +245,26 @@ button:hover {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .info-boxes {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .info-box {
-    width: 90%;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
-  p {
-    font-size: 14px;
-  }
+/* Phone Wrapper */
+.phone-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
 }
 
-
-@media (max-width: 768px) {
-  body {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: auto;
-    /* sig‘mayotgan kontent uchun */
-    overflow-y: auto;
-    /* scroll yoqiladi */
-    padding: 20px 0;
-  }
-
-  .main-content {
-    order: 1;
-    /* avval chiqadi */
-    margin-top: 60px;
-    padding: 0 10px 50px 10px;
-  }
-
-  .main-content img {
-    width: 140px;
-    height: 140px;
-  }
-
-  h1 {
-    font-size: 26px;
-  }
-
-  p {
-    font-size: 14px;
-    padding: 0 10px;
-  }
-
-  button {
-    font-size: 13px;
-    padding: 12px 30px;
-  }
-
-  .info-boxes {
-    position: relative;
-    order: 2;
-    /* endi pastda chiqadi */
-    top: auto;
-    margin-top: 50px;
-    margin-bottom: 40px;
-    width: 90%;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .info-box {
-    width: 90%;
-    text-align: center;
-    margin-bottom: 10px;
-  }
+.phone-prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 6px;
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+  flex-shrink: 0;
 }
-
-
-
-.phone-wrapper .flag {
-  white-space: nowrap;
-  font-weight: 600;
-  color: #000;
-}
-
-.phone-wrapper input {
-  border: none;
-  outline: none;
-  font-size: 15px;
-  width: 100%;
-}
-
 
 .flag-icon {
   width: 22px;
@@ -383,61 +273,18 @@ button:hover {
   border-radius: 2px;
 }
 
-.prefix {
-  font-size: 15px;
-  font-weight: 600;
-  color: #000;
+.dial {
+  font-weight: 700;
+  color: #111;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .phone-wrapper input {
-  border: none;
-  outline: none;
-  font-size: 15px;
   flex: 1;
-}
-
-.phone-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 6px;
-  background: #fff;
-}
-
-.phone-prefix {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background: #f7f7f7;
-  border: 1px solid #e5e5e5;
-  flex-shrink: 0;
-  /* +998 blok kattalashib ketmasin */
-}
-
-.flag-icon {
-  width: 18px;
-  height: 14px;
-  display: block;
-  object-fit: cover;
-}
-
-.dial {
-  font-weight: 700;
-  color: #111;
-  font-size: 14px;
-  /* bir xil o‘lchamda turadi */
-  line-height: 1;
-}
-
-.phone-wrapper input {
   border: none;
   outline: none;
   font-size: 15px;
-  width: 100%;
   color: #111;
 }
 
@@ -445,67 +292,16 @@ button:hover {
   color: #e53935;
   font-size: 12px;
   margin-top: 6px;
-  display: block;
-}
-/* === Phone input uchun oldingi inline-styles === */
-
-.phone-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid #ccc;
-  padding: 0; /* HTML ichidagi padding:0 */
-  padding: 10px;
-  border-radius: 6px;
-  background: #fff;
+  display: none;
 }
 
-.phone-prefix {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px; /* HTML ichidagi padding */
-  border-radius: 6px;
-  background: #f7f7f7;
-  border: 1px solid #e5e5e5;
-  flex-shrink: 0;
-}
-
-.flag-icon {
-  width: 22px; /* HTML ichidagi width */
-  height: 15px;
-  object-fit: cover;
-  border-radius: 2px;
-}
-
-.dial {
-  font-weight: 700;
-  color: #111;
-  font-size: 14px;
-  line-height: 1;
-}
-
-.phone-wrapper input {
-  border: none;
-  outline: none;
-  font-size: 15px;
-  margin-bottom: 0; /* HTML ichidagi style */
-  width: 100%;
-  color: #111;
-}
-
-.error-text {
-  color: #e53935;
-  font-size: 12px;
-  margin-top: 6px;
-  display: none; /* har doim berilgan bo‘lsin */
-}
+/* Toast */
 .toast {
   position: fixed;
   top: 25px;
   right: 25px;
   padding: 14px 22px;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
   border-radius: 12px;
   font-size: 15px;
@@ -517,16 +313,14 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
 }
 
-/* Ko‘rinadigan holat */
 .toast.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Chat-style pufakcha */
 .toast:after {
   content: "";
   position: absolute;
@@ -536,13 +330,13 @@ button:hover {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 12px solid rgba(0,0,0,0.85);
+  border-top: 12px solid rgba(0, 0, 0, 0.85);
 }
 
-/* Turlari */
 .toast.success {
   background: #2ecc71;
 }
+
 .toast.success:after {
   border-top-color: #2ecc71;
 }
@@ -550,20 +344,355 @@ button:hover {
 .toast.warning {
   background: #f1c40f;
 }
+
 .toast.warning:after {
   border-top-color: #f1c40f;
 }
 
-/* Ikonkalar */
-.toast i {
-  font-size: 20px;
-}
-
-
-/* SVG ikonkalar o‘lchami */
 .toast svg {
   width: 22px;
   height: 22px;
-  flex-shrink: 0;
   fill: #fff;
+  flex-shrink: 0;
+}
+
+/* Media Queries */
+@media (max-width:768px) {
+  h1 {
+    font-size: 26px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .main-content img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .attention-btn {
+    font-size: 20px;
+    padding: 17px 30px;
+  }
+
+  .info-boxes {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    order: 2;
+  }
+
+  .info-box {
+    width: 90%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  body {
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+    overflow-y: auto;
+    padding: 20px 0;
+  }
+
+  .main-content {
+    order: 1;
+    margin-top: 30px;
+    padding: 0 10px 50px;
+  }
+
+  .partners {
+    order: 2;
+  }
+
+  .info-boxes {
+    order: 3;
+  }
+
+}
+
+/* Partners Section */
+
+.partners {
+  text-align: center;
+  width: 100%;
+  margin: 40px auto 0 auto !important;
+  overflow: hidden!important;
+  position: relative;
+}
+
+.partners h2 {
+  font-size: 30px!important;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.partners-wrapper a{
+  text-decoration: none;
+}
+
+/* Wrapper */
+.partners-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* qo‘lda scroll imkoniyati */
+  -webkit-overflow-scrolling: touch; /* iOS smooth */
+  scroll-behavior: auto; /* smooth ni o‘chirish */
+  gap: 15px;
+  padding-bottom: 10px;
+}
+.partners-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.partners-wrapper .partner span {
+  white-space: nowrap;  /* Matnni majburan bir qatorda ushlab turadi */
+  display: inline-block;
+  line-height: 1.2;
+}
+
+
+/* Individual partner */
+.partner {
+  flex: 1 1 calc(25% - 15px);
+  /* 4 ta partner desktopda */
+  display: flex;
+  flex-direction: column;
+  /* rasm yuqori, matn past */
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.partner img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+/* Mobile Adjustments */
+
+
+/* Scrollbar ni yashirish */
+.partners-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop brandlar width info-boxes ga teng */
+@media (min-width:769px) {
+  .partners-wrapper {
+    display: flex;
+    justify-content: space-between;
+    /* bo‘sh joysiz */
+    width: 100%;
+  }
+
+  .partner {
+    flex: 1;
+    margin: 0 5px;
+  }
+}
+
+
+
+
+/* Attention button tooltip va ripple effect tuzatilgan */
+.attention-btn::before,
+.attention-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  height: 220%;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  /* scale 0 dan boshlanishi */
+  opacity: 0;
+  animation: waveRipple 3s infinite ease-out;
+}
+
+/* Media query ichida info-box va attention-btn z-index bilan */
+
+
+/* Partner rasm tepasida bo‘lishi uchun */
+.partner {
+  flex: 0 0 auto;              /* o'lchamni qatorda saqlash */
+  width: auto;                /* logolar o'lchami */
+  display: flex;
+  flex-direction: column;      /* logo tepa, matn past */
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+.partners-wrapper::-webkit-scrollbar {
+  display: none; /* scroll bar yashirish */
+}
+/* Desktop brandlar width info-boxes ga teng */
+@media (min-width:769px) {
+  .partners-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0;
+    /* bo‘sh joy olib tashlash */
+  }
+
+  .partner {
+    flex: 1;
+    margin: 0 5px;
+  }
+}
+
+
+
+
+.partners h2 {
+  position: relative;
+  left: 0;
+  width: 100%;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+}
+
+
+.partner {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  /* logo chapda, nom o‘ngda */
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.partner img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  /* logo va matn orasidagi bo‘sh joy */
+}
+
+.partner span {
+  white-space: nowrap;
+}
+
+/* Hover effect */
+.partner:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+}
+
+@media (max-width: 768px) {
+
+  /* MODAL */
+  .modal-content button {
+    margin-top: 30px;
+  }
+
+  .name-input {
+    margin-bottom: 10px;
+  }
+  .partners-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    overflow-x: auto;         /* qo‘lda scroll uchun */
+    scroll-behavior: smooth;  /* smooth swipe */
+    -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
+    padding-bottom: 10px;      /* scroll uchun joy */
+  }
+
+  
+  .partners-wrapper::-webkit-scrollbar {
+    display: none; /* scrollbar yashirish */
+  }
+  .partners {
+    margin: 0;
+    width: 100%;
+  }
+
+  .partner {
+    flex: 0 0 auto;
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+  }
+  .partner span {
+    white-space: normal;
+    text-align: left;
+  }
+
+  .partners h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: gold !important;
+  }
+
+  /* INFO BOX – SLIDER OSTIGA TUSHIRISH */
+  .info-boxes {
+    position: relative;
+    top: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0 0 0;
+    order: 3;
+  }
+
+  .info-box {
+    width: 90%;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+    top: auto;
+    z-index: 1;
+  }
+
+  .main-content {
+    z-index: 2;   /* Tugmalar oldinda bo'ladi */
+  }
+  
+  .info-boxes h2{
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .info-boxes {
+    position: static;
+  }
 }

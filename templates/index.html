@@ -7,11 +7,12 @@
   <title>Huzayfa Jalolov</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/732/732190.png">
   <link rel="stylesheet" href="static/style.css">
-
 </head>
 
 <body>
+  <!-- Info Boxes -->
   <div class="info-boxes">
+    <h2>Haqimizda!</h2>
     <div class="info-box">
       <span>/01</span>
       Kompaniyangizdagi sotuvni va samaradorlikni oshirishga yordam beramiz
@@ -26,14 +27,63 @@
     </div>
   </div>
 
+  <!-- Main Content -->
   <div class="main-content">
-    <img src="static/IMG_20251107_192516_903.JPG" alt="Profile Photo">
-    <h1>IT XIZMAT UCHUN <span style="color: gold;">KONSULTATSIYA BEPUL</span></h1>
+    <img src="static/images/IMG_20251107_192516_903.JPG" alt="Profile Photo">
+    <h1>IT XIZMAT UCHUN <span class="highlight">KONSULTATSIYA BEPUL</span></h1>
     <p>o'z mutaxassislaringizdan qildiring yoki pulingizni qaytarib oling!</p>
-    <button id="openModal" style="color: #fff;" class="attention-btn">ARIZA QOLDIRISH</button>
-
-
+    <button id="openModal" class="attention-btn">ARIZA QOLDIRISH</button>
   </div>
+
+  <div class="partners">
+    <h2>Hamkorlarimiz</h2>
+    <div class="partners-wrapper">
+      <a href="https://t.me/+hm6Ihq9d7okxNTZi">
+        <div class="partner">
+          <img src="static/images/photo_2025-11-16_18-52-40.jpg" alt="Brand 1 Logo">
+          <span>ISHBOR <br>KANALI</span>
+        </div>
+      </a>
+      <a href="https://powernature.uz">
+        <div class="partner">
+          <img src="static/images/photo_2025-11-16_18-52-32.jpg" alt="Brand 2 Logo">
+          <span>POWERNATURE <br>QUYOSH PANEL</span>
+        </div>
+      </a>
+      <a href="https://redone.uz">
+        <div class="partner">
+          <img src="static/images/photo_2025-11-16_18-52-37.jpg" alt="Brand 3 Logo">
+          <span>REDONE SOCH <br>MAHSULOTLARI</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/otash.qassob?igsh=MXhndWx5N251YzBsZA==">
+        <div class="partner">
+          <img src="static/images/photo_2025-11-17_16-34-12.jpg" alt="Brand 7 Logo">
+          <span>OTASH QASSOB<br>KOREA</span>
+        </div>
+      </a>
+      <a href="https://t.me/ArchCreoDesignBot">
+        <div class="partner">
+          <img src="static/images/photo_2025-11-16_18-52-38.jpg" alt="Brand 4 Logo">
+          <span>ARCHCREODESIGN <br>Arxitektura va Dizayn</span>
+        </div>
+      </a>
+      <a href="https://t.me/QorovulOnBot">
+        <div class="partner">
+          <img src="static/images/image.png" alt="Brand 5 Logo">
+          <span>Qorovul Online <br>Telegram Bot</span>
+        </div>
+      </a>
+      <a href="https://divani.uz">
+        <div class="partner">
+          <img src="static/images/photo_2025-11-17_13-54-49.jpg" alt="Brand 6 Logo">
+          <span>DIVANI.UZ<br>MEBEL</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+
 
   <!-- Modal -->
   <div class="modal" id="modal">
@@ -43,7 +93,7 @@
       <p>Ma'lumotlaringizni qoldiring, siz bilan shaxsan o'zim bog'lanaman</p>
       <form action="/submit" method="POST">
         <label>Ismingiz</label>
-        <input type="text" name="name" placeholder="Ismingiz" required>
+        <input class="name-input" type="text" name="name" placeholder="Ismingiz" required>
 
         <label>Telefon raqamingiz</label>
         <div class="phone-wrapper">
@@ -52,132 +102,27 @@
               class="flag-icon">
             <span class="dial">+998</span>
           </span>
-
           <input type="text" id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="901234567"
             maxlength="9" pattern="^\d{9}$" required aria-describedby="phoneError">
         </div>
-
-        <small id="phoneError" class="error-text">
-          Telefon raqam faqat raqamlardan iborat bo‘lsin va aniq 9 ta raqam kiriting.
-        </small>
-        <!-- 
-        <label>Biznesingiz yo‘nalishi</label>
-        <input type="text" name="business" placeholder="Sohangiz" required>
-
-        <label>IT dastur uchun budjetingiz</label>
-        <input type="text" name="budget" placeholder="$15.000" required> -->
+        <small id="phoneError" class="error-text">Telefon raqam faqat raqamlardan iborat bo‘lsin va aniq 9 ta raqam
+          kiriting.</small>
 
         <button type="submit">YUBORISH</button>
       </form>
-
-
     </div>
   </div>
+
   <div id="toast" class="toast"></div>
 
-  <script>
-    // === Modal funksiyalari ===
-    const openModal = document.getElementById('openModal');
-    const closeModal = document.getElementById('closeModal');
-    const modal = document.getElementById('modal');
-
-    openModal.addEventListener('click', () => {
-      modal.classList.add('show');
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
-
-    const closeModalFunc = () => {
-      modal.classList.remove('show');
-      setTimeout(() => {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }, 400);
-    };
-
-    closeModal.addEventListener('click', closeModalFunc);
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) closeModalFunc();
-    });
-
-    modal.addEventListener('touchmove', (e) => {
-      e.stopPropagation();
-    }, { passive: true });
-
-    // === Telefon faqat raqam bo‘lsin ===
-    const phoneInput = document.getElementById("phone");
-    const phoneError = document.getElementById("phoneError");
-
-    phoneInput.addEventListener("input", () => {
-      phoneInput.value = phoneInput.value.replace(/\D/g, "");
-    });
-
-    // === SVG ikonka bilan toast ===
-    function showToast(message, type = "success") {
-      const toast = document.getElementById("toast");
-
-      const icons = {
-        success: `
-        <svg viewBox="0 0 24 24">
-          <path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"></path>
-        </svg>
-      `,
-        warning: `
-        <svg viewBox="0 0 24 24">
-          <path d="M1 21h22L12 2 1 21z"></path>
-        </svg>
-      `
-      };
-
-      toast.innerHTML = icons[type] + message;
-
-      toast.className = "toast show " + type;
-
-      setTimeout(() => {
-        toast.className = "toast " + type;
-      }, 3200);
-    }
-
-    // === Formni AJAX orqali yuborish ===
-    document.querySelector("form").addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      if (phoneInput.value.length !== 9) {
-        phoneError.style.display = "block";
-        return;
-      }
-
-      phoneError.style.display = "none";
-
-      const formData = new FormData(this);
-
-      try {
-        const response = await fetch("/submit", {
-          method: "POST",
-          body: formData
-        });
-
-        if (response.ok) {
-          showToast("Ma'lumotlar muvaffaqiyatli yuborildi.", "success");
-        } else {
-          showToast("Xatolik bo‘ldi, ammo ma'lumotlar qabul qilindi.", "warning");
-        }
-
-      } catch (error) {
-        showToast("Serverga ulanib bo‘lmadi, ammo ma'lumotlar qabul qilindi.", "warning");
-      }
-
-      this.reset();
-      closeModalFunc();
-    });
-  </script>
-
+  <!-- Scripts -->
+  <script src="static/main.js"></script>
+  <!-- Yandex.Metrika -->
   <script type="text/javascript">
     (function (m, e, t, r, i, k, a) {
       m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
       m[i].l = 1 * new Date();
-      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) return; }
       k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=105343419', 'ym');
 
@@ -186,10 +131,6 @@
   <noscript>
     <div><img src="https://mc.yandex.ru/watch/105343419" style="position:absolute; left:-9999px;" alt="" /></div>
   </noscript>
-
-
-
-
 
 </body>
 

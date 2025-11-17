@@ -1,5 +1,5 @@
 {
-  "visits": 258,
+  "visits": 262,
   "leads": [
     {
       "id": 1,
@@ -160,6 +160,16 @@
       "status": "bog'lanmadik",
       "comment": "",
       "created_at": "2025-11-14T12:46:29.503751+05:00"
+    },
+    {
+      "id": 17,
+      "name": "fazliddin",
+      "phone": "900077119",
+      "business": null,
+      "budget": null,
+      "status": "bog'lanmadik",
+      "comment": "",
+      "created_at": "2025-11-16T18:10:35.117047+05:00"
     }
   ]
 }

@@ -117,6 +117,11 @@ def submit():
 
     return redirect(url_for("index"))
 
+@app.route("/hamkorlarimiz")
+def hamkorlarimiz():
+    return render_template("hamkorlarimiz.html")
+
+
 # === Admin login ===
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
