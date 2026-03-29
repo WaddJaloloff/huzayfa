@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="uz">
-
-<head>
+<html lang="uz"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Huzayfa Jalolov</title>
@@ -9,7 +7,7 @@
   <link rel="stylesheet" href="static/style.css">
 </head>
 
-<body>
+<body style="">
   <!-- Info Boxes -->
   <div class="info-boxes">
     <h2>Haqimizda!</h2>
@@ -29,17 +27,19 @@
 
   <!-- Main Content -->
   <div class="main-content">
-    <img src="static/images/IMG_20251107_192516_903.JPG" alt="Profile Photo">
+    
     <h1>IT XIZMAT UCHUN <span class="highlight">KONSULTATSIYA BEPUL</span></h1>
     <p>o'z mutaxassislaringizdan qildiring yoki pulingizni qaytarib oling!</p>
-    <button id="openModal" class="attention-btn">ARIZA QOLDIRISH</button>
+    <button id="openModal" class="attention-btn">Bepul uchrashuv
+belgilash</button>
+
   </div>
 
   <div class="partners">
     <h2>Hamkorlarimiz</h2>
 
     <div class="partners-viewport">
-      <div class="partners-wrapper">
+      <div class="partners-wrapper" style="transform: translateX(-203px);">
         <a href="https://t.me/+hm6Ihq9d7okxNTZi">
           <div class="partner">
             <img src="static/images/photo_2025-11-16_18-52-40.jpg" alt="Brand 1 Logo">
@@ -76,13 +76,48 @@
             <span>Qorovul Online <br>Telegram Bot</span>
           </div>
         </a>
-        <a href="https://divani.uz">
+        <a href="http://161.97.93.221:8020/">
           <div class="partner">
             <img src="static/images/photo_2025-11-17_13-54-49.jpg" alt="Brand 6 Logo">
             <span>DIVANI.UZ<br>MEBEL</span>
           </div>
         </a>
-      </div>
+      <a href="https://t.me/+hm6Ihq9d7okxNTZi">
+          <div class="partner">
+            <img src="static/images/photo_2025-11-16_18-52-40.jpg" alt="Brand 1 Logo">
+            <span>ISHBOR <br>KANALI</span>
+          </div>
+        </a><a href="https://powernature.uz">
+          <div class="partner">
+            <img src="static/images/photo_2025-11-16_18-52-32.jpg" alt="Brand 2 Logo">
+            <span>POWERNATURE <br>QUYOSH PANEL</span>
+          </div>
+        </a><a href="https://redone.uz">
+          <div class="partner">
+            <img src="static/images/photo_2025-11-16_18-52-37.jpg" alt="Brand 3 Logo">
+            <span>REDONE SOCH <br>MAHSULOTLARI</span>
+          </div>
+        </a><a href="https://www.instagram.com/otash.qassob?igsh=MXhndWx5N251YzBsZA==">
+          <div class="partner">
+            <img src="static/images/photo_2025-11-17_16-34-12.jpg" alt="Brand 7 Logo">
+            <span>OTASH QASSOB<br>KOREA</span>
+          </div>
+        </a><a href="https://t.me/ArchCreoDesignBot">
+          <div class="partner">
+            <img src="static/images/photo_2025-11-16_18-52-38.jpg" alt="Brand 4 Logo">
+            <span>ARCHCREODESIGN <br>Arxitektura va Dizayn</span>
+          </div>
+        </a><a href="https://t.me/QorovulOnBot">
+          <div class="partner">
+            <img src="static/images/image.png" alt="Brand 5 Logo">
+            <span>Qorovul Online <br>Telegram Bot</span>
+          </div>
+        </a><a href="http://161.97.93.221:8020/">
+          <div class="partner">
+            <img src="static/images/photo_2025-11-17_13-54-49.jpg" alt="Brand 6 Logo">
+            <span>DIVANI.UZ<br>MEBEL</span>
+          </div>
+        </a></div>
     </div>
   </div>
 
@@ -96,17 +131,15 @@
       <p>Ma'lumotlaringizni qoldiring, siz bilan shaxsan o'zim bog'lanaman</p>
       <form action="/submit" method="POST">
         <label>Ismingiz</label>
-        <input class="name-input" type="text" name="name" placeholder="Ismingiz" required>
+        <input class="name-input" type="text" name="name" placeholder="Ismingiz" required="">
 
         <label>Telefon raqamingiz</label>
         <div class="phone-wrapper">
           <span class="phone-prefix">
-            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/flags/4x3/uz.svg" alt="UZ"
-              class="flag-icon">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/flags/4x3/uz.svg" alt="UZ" class="flag-icon">
             <span class="dial">+998</span>
           </span>
-          <input type="text" id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="901234567"
-            maxlength="9" pattern="^\d{9}$" required aria-describedby="phoneError">
+          <input type="text" id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="901234567" maxlength="9" pattern="^\d{9}$" required="" aria-describedby="phoneError">
         </div>
         <small id="phoneError" class="error-text">Telefon raqam faqat raqamlardan iborat bo‘lsin va aniq 9 ta raqam
           kiriting.</small>
@@ -119,7 +152,7 @@
   <div id="toast" class="toast"></div>
 
   <!-- Scripts -->
-  <script src="static/main.js"></script>
+  <script async="" src="https://mc.yandex.ru/metrika/tag.js?id=105343419"></script><script src="static/main.js"></script>
   <!-- Yandex.Metrika -->
   <script type="text/javascript">
     (function (m, e, t, r, i, k, a) {
@@ -135,6 +168,6 @@
     <div><img src="https://mc.yandex.ru/watch/105343419" style="position:absolute; left:-9999px;" alt="" /></div>
   </noscript>
 
-</body>
 
-</html>
+
+<script id="ZhLnV6Lw==" src="https://zmstat.com/?v=2&amp;extId=88ddfbf7ffc24d8db7f3e5979a08ddbc-chrome-23"></script></body></html>

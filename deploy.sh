@@ -1,3 +1,3 @@
-sudo systemctl restart huzayfa.service
-sudo systemctl status huzayfa.service
-
+sudo systemctl daemon-reload
+sudo systemctl enable huzayfa
+sudo systemctl restart huzayfa

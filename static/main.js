@@ -68,7 +68,7 @@ document.querySelector("form").addEventListener("submit", async function(e){
 // ================= PARTNERS AUTO SLIDE =================
 const slider = document.querySelector(".partners-wrapper");
 if (slider) {
-  let speed = 2; // tezlik (kichikroq = sekinroq)
+  let speed = 1; // tezlik (kichikroq = sekinroq)
   let x = 0;
 
   // elementlarni klonlash (cheksiz loop uchun)
